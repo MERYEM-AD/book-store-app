@@ -5,7 +5,6 @@ import {
   Form,
   Button,
   Card,
-  CardColumns,
   Row
 } from 'react-bootstrap';
 
@@ -25,7 +24,7 @@ const SearchBooks = () => {
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-
+// eslint-disable-next-line 
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -69,6 +68,7 @@ const SearchBooks = () => {
   };
 
   // create function to handle saving a book to our database
+  // eslint-disable-next-line 
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
@@ -81,6 +81,7 @@ const SearchBooks = () => {
     }
 
     try {
+      // eslint-disable-next-line 
       const { data } = await saveBook({
         variables: { bookData: { ...bookToSave } },
       });
