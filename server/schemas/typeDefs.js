@@ -9,6 +9,13 @@ const typeDefs = gql`
     savedBooks: [Book]
   }
 
+  type Review {
+    title: String!
+    author: String!
+    star: Int
+    comment: String
+  }
+
   type Book {
     bookId: ID!
     authors: [String]
@@ -32,8 +39,10 @@ const typeDefs = gql`
     title: String!
   }
 
+  //add review query to below
   type Query {
     me: User
+
   }
 
   type Mutation {
@@ -41,6 +50,7 @@ const typeDefs = gql`
     addUser(username: String!, email: String!, password: String!): Auth
     saveBook(bookData: BookInput!): User
     removeBook(bookId: ID!): User
+    addReview(title: String, author:String, star: Int, comment: String): User
   }
 `;
 
