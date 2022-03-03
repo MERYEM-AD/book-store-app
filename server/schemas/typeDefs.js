@@ -6,7 +6,6 @@ type User {
     _id: ID!
     username: String!
     email: String
-    orders: [Order]
   }
 
   type Review {
@@ -30,8 +29,7 @@ type User {
 type Cart {
   userId: ID!
   BookId: ID!
-  session: ID
-  products: [Product]
+  
 }
 
 
