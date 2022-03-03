@@ -39,7 +39,7 @@ const typeDefs = gql`
     title: String!
   }
 
-  //add review query to below
+
   type Query {
     me: User
 
