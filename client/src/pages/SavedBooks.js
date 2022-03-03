@@ -16,6 +16,7 @@ import Auth from '../utils/auth';
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(QUERY_ME);
+  // eslint-disable-next-line 
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
@@ -30,6 +31,7 @@ const SavedBooks = () => {
     }
 
     try {
+      // eslint-disable-next-line 
       const { data } = await removeBook({
         variables: { bookId },
       });
@@ -49,7 +51,7 @@ const SavedBooks = () => {
     <>
       <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing {userData.username}'s cart!</h1>
+          <h1>Viewing {userData.username}'s books!</h1>
         </Container>
       </Jumbotron>
       <Container>
@@ -79,7 +81,7 @@ const SavedBooks = () => {
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteBook(book.bookId)}
                   >
-                    Remove from cart
+                    Delete this Book!
                   </Button>
                 </Card.Body>
               </Card>

@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Jumbotron,
   Container,
   Col,
   Form,
   Button,
   Card,
-  CardColumns,
+  Row
 } from 'react-bootstrap';
 
+import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 import Auth from '../utils/auth';
+import Slider from '../components/Slider';
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -23,7 +24,7 @@ const SearchBooks = () => {
 
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-
+// eslint-disable-next-line 
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
@@ -42,7 +43,7 @@ const SearchBooks = () => {
 
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}&filter=paid-ebooks`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
       );
 
       if (!response.ok) {
@@ -57,9 +58,6 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
-        category: book.volumeInfo.categories,
-        price: book.saleInfo.retailPrice.amount,
-
       }));
 
       setSearchedBooks(bookData);
@@ -70,6 +68,7 @@ const SearchBooks = () => {
   };
 
   // create function to handle saving a book to our database
+  // eslint-disable-next-line 
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
@@ -82,6 +81,7 @@ const SearchBooks = () => {
     }
 
     try {
+      // eslint-disable-next-line 
       const { data } = await saveBook({
         variables: { bookData: { ...bookToSave } },
       });
@@ -93,11 +93,10 @@ const SearchBooks = () => {
   };
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
-          <h1>Search for Books!</h1>
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
+  
+        <div>
+          <Form className="d-flex"  onSubmit={handleFormSubmit}>
+            <Form.Row style ={{alignItems:'center'}}>
               <Col xs={12} md={8}>
                 <Form.Control
                   name="searchInput"
@@ -109,25 +108,31 @@ const SearchBooks = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
+                <Button type="submit" variant="success">
+                  Search
                 </Button>
               </Col>
             </Form.Row>
           </Form>
-        </Container>
-      </Jumbotron>
+        </div>
+  
+  <Slider />
 
       <Container>
         <h2>
           {searchedBooks.length
             ? `Viewing ${searchedBooks.length} results:`
-            : 'Search for a book to begin'}
+            : 'No searched book done yet'}
         </h2>
-        <CardColumns>
+
+        <Row className="justify-content-center">
+  
+
+    
+    
           {searchedBooks.map((book) => {
             return (
-              <Card key={book.bookId} border="dark">
+              <Card style={{ maxWidth: '22rem' }} key={book.bookId} border="dark">
                 {book.image ? (
                   <Card.Img
                     src={book.image}
@@ -138,8 +143,8 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
-                  {Auth.loggedIn() && (
+                  {/* <Card.Text>{book.description}</Card.Text> */}
+                  {/* {Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
                         (savedId) => savedId === book.bookId
@@ -151,12 +156,21 @@ const SearchBooks = () => {
                         ? 'Book Already Saved!'
                         : 'Save This Book!'}
                     </Button>
-                  )}
+                  )} */}
+
+<Link
+                className="btn btn-block btn-squared btn-light text-dark"
+                // reviwId = bookid
+                to={`/Review/:ReviewId`}
+          
+              >
+               See Review
+              </Link>
                 </Card.Body>
               </Card>
             );
           })}
-        </CardColumns>
+           </Row>
       </Container>
     </>
   );
