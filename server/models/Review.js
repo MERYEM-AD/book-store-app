@@ -1,21 +1,24 @@
 const { Schema } = require('mongoose');
 
 const reviewSchema = new Schema({
-    userID: {
-      type: String,
-      required: true,
+    
+    title: {
+        type: String,
+        required: true
     },
-    bookID: {
-      type: String,
-      required: true,
+    author: {
+        type: String,
+        required: true
     },
     star: {
         type: Number,
+        required: true
     },
     comment: {
-        type : String
+        type : String,
+        required: true
     }
-
   });
+
 
   module.exports = reviewSchema;

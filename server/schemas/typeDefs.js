@@ -9,6 +9,13 @@ type User {
     orders: [Order]
   }
 
+  type Review {
+    title: String!
+    author: String!
+    star: Int
+    comment: String
+  }
+
   type Book {
     bookId: ID!
     authors: [String]
@@ -19,19 +26,6 @@ type User {
     title: String!
   }
 
-type Review {
-  userId: ID!
-  BookId: ID!
-  
-
-}
-
-type Category {
-  _id: ID
-  bookId: ID!
-  title: String 
-  category: String 
-}
 
 type Cart {
   userId: ID!
@@ -55,38 +49,19 @@ type Cart {
     title: String!
   }
 
+  //add review query to below
   type Query {
-    categories: [Category]
-    book(category: ID, name: String): [Product]
-    book(_id: ID!): Product
-    user: User
-    cart(_id: ID!): Cart
-    checkout(products: [ID]!): Checkout
+    me: User
   }
-  
-
-
-  type Auth {
-    token: ID!
-    user: User
-  }
-
-
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
-    addCart(products: [ID]!): Order
-    updateUser(firstName: String, lastName: String, email: String, password: String): User
-    updateBook(_id: ID!, quantity: Int!): Book
     login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!, password: String!): Auth
+    saveBook(bookData: BookInput!): User
+    removeBook(bookId: ID!): User
+    addReview(title: String, author:String, star: Int, comment: String): User
+
   }
-`
-
-
-
-
-
-
-;
+`;
 
 module.exports = typeDefs;
