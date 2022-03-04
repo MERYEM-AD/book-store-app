@@ -6,6 +6,7 @@ type User {
     _id: ID!
     username: String!
     email: String
+    cart: [Book]
   }
 
   type Review {
@@ -50,6 +51,7 @@ type Cart {
 
   type Query {
     me: User
+    Reviews: [Review]!
   }
 
   type Mutation {

@@ -68,7 +68,7 @@ const SearchBooks = () => {
   };
 
   // create function to handle saving a book to our database
-  // eslint-disable-next-line 
+
   const handleSaveBook = async (bookId) => {
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
@@ -81,7 +81,7 @@ const SearchBooks = () => {
     }
 
     try {
-      // eslint-disable-next-line 
+
       const { data } = await saveBook({
         variables: { bookData: { ...bookToSave } },
       });
@@ -93,10 +93,11 @@ const SearchBooks = () => {
   };
   return (
     <>
-  
-        <div>
-          <Form className="d-flex"  onSubmit={handleFormSubmit}>
-            <Form.Row style ={{alignItems:'center'}}>
+  <Form className="d-flex"  onSubmit={handleFormSubmit}>
+        <Container>
+          <Row>
+          
+            <Form.Group style ={{alignItems:'center'}}>
               <Col xs={12} md={8}>
                 <Form.Control
                   name="searchInput"
@@ -112,9 +113,11 @@ const SearchBooks = () => {
                   Search
                 </Button>
               </Col>
-            </Form.Row>
-          </Form>
-        </div>
+            </Form.Group>
+
+          </Row>
+        </Container>
+        </Form>
   
   <Slider />
 

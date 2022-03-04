@@ -8,7 +8,7 @@ function Home () {
           
   
   <Container>
-      {/* <SearchBooks /> */}
+      <SearchBooks />
     
 
 
