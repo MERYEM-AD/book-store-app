@@ -59,7 +59,7 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
         categories : book.volumeInfo.categories,
-        price : book.saleInfo.retailPrice.amount
+        price : book.saleInfo.retailPrice.amount,
       }));
 
       setSearchedBooks(bookData);
@@ -148,8 +148,9 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
+                  <p className="small">Price: {book.price}</p>
                   <Card.Text>{book.description}</Card.Text>
-                   { Auth.loggedIn() && (
+                  { Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
                         (savedId) => savedId === book.bookId
@@ -169,13 +170,13 @@ const SearchBooks = () => {
                 to={`/Review/:ReviewId`}
           
               >
-               See Review
+              See Review
               </Link>
                 </Card.Body>
               </Card>
             );
           })}
-           </Row>
+          </Row>
       </Container>
     </>
   );
