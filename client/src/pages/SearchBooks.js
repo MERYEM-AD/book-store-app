@@ -43,7 +43,7 @@ const SearchBooks = () => {
 
     try {
       const response = await fetch(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}`
+        `https://www.googleapis.com/books/v1/volumes?q=${searchInput}&filter=paid-ebooks`
       );
 
       if (!response.ok) {
@@ -58,6 +58,8 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
+        categories : book.volumeInfo.categories,
+        price : book.saleInfo.retailPrice.amount
       }));
 
       setSearchedBooks(bookData);
@@ -146,8 +148,8 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  {/* <Card.Text>{book.description}</Card.Text> */}
-                  {/* {Auth.loggedIn() && (
+                  <Card.Text>{book.description}</Card.Text>
+                   { Auth.loggedIn() && (
                     <Button
                       disabled={savedBookIds?.some(
                         (savedId) => savedId === book.bookId
@@ -159,7 +161,7 @@ const SearchBooks = () => {
                         ? 'Book Already Saved!'
                         : 'Save This Book!'}
                     </Button>
-                  )} */}
+                  )}
 
 <Link
                 className="btn btn-block btn-squared btn-light text-dark"
