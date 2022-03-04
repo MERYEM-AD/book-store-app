@@ -16,7 +16,7 @@ import Auth from '../utils/auth';
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(QUERY_ME);
-  // eslint-disable-next-line 
+ 
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
   const userData = data?.me || {};
@@ -31,7 +31,7 @@ const SavedBooks = () => {
     }
 
     try {
-      // eslint-disable-next-line 
+      
       const { data } = await removeBook({
         variables: { bookId },
       });
