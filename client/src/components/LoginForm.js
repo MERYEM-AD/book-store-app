@@ -42,8 +42,8 @@ const LoginForm = () => {
         variables: { ...userFormData },
       });
 
-      console.log(data);
-      Auth.login(data.login.token);
+      const username = data.login.user.username;
+      Auth.login(data.login.token ,username);
     } catch (e) {
       console.error(e);
     }
@@ -99,6 +99,7 @@ const LoginForm = () => {
           disabled={!(userFormData.email && userFormData.password)}
           type="submit"
           variant="success"
+          className='modalButt'
         >
           Submit
         </Button>

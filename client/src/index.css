@@ -1,5 +1,14 @@
+
 body {
   font-family: 'Rubik', sans-serif;
+  background-image: url("https://thumbs.dreamstime.com/b/grungy-book-background-7862122.jpg");
+  background-position: center;
+  background-size: cover;
+  /* height: 30vh; */
+  background-attachment: fixed; 
+       /*Turn this section to flexbox */
+
+
 }
 
 h1,
@@ -14,4 +23,129 @@ h6 {
 .small {
   font-weight: 300;
   font-style: italic;
+  color: chocolate;
+}
+/* #root */
+#root {
+margin: 30px;  
+height: 500vh;
+background-color: white;
+}
+
+/* NavBar  */
+
+.Header-Container{
+  padding: 10px;
+}
+.navbar {
+  padding: 0;
+  background-color: #61361c;
+}
+.navbar-light .navbar-brand {
+  color: #61361c;
+  font-size: 29px;
+  background-color: #CECD94;
+  border-radius: 0px 30px 30px 0px;
+  padding: 19px;
+  margin-left: -10px;
+  padding-left: 38px;
+  font-weight: bolder;
+}
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover{
+  color: #61361c;
+}
+.navbar-light .navbar-nav .nav-link{
+
+  color: white;
+  font-size: 20px;
+}
+
+.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+
+  color:#CECD94 ;
+}
+.navbar-light .navbar-toggler{
+
+  background-color:#CECD94 ;
+}
+.nav-link{
+  color: #61361c;
+}
+.nav-link:focus, .nav-link:hover{
+  color: chocolate;
+  cursor:pointer
+
+}
+
+/* Modal */
+
+.modal-backdrop {
+  background-color:unset;
+  ;
+}
+.modal-content {
+  
+  background-color:linen ;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+
+  background-color: green;
+}
+
+.nav-pills .nav-link{
+
+  border-radius: 4.25rem;
+}
+
+.modal-body{
+
+  color: #61361c;
+  font-size: 16px;
+}
+.modal-body form div{
+  padding: 10px;
+}
+.form-control{
+  border-radius: 4.25rem;
+}
+
+.modalButt{
+  width: 100%;
+}
+
+
+/* Card */
+
+.card {
+
+  background-color: antiquewhite;
+
+
+}
+.card-img, .card-img-bottom, .card-img-top{
+  height: 30vh;
+  margin: 20px;
+}
+.card-title{
+  color: #61361c;
+  font-size: 14px;
+}
+
+/* Team */
+
+.team{
+  margin-top: 80px;
+}
+
+.team .card-title {
+  font-size: 25px;
+  font-weight: bolder;
+}
+
+.team .card-footer a {
+
+  color: chocolate;
+    text-decoration: unset;
+    font-size: 15px;
 }
