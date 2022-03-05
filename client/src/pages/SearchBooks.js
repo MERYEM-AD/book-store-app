@@ -72,8 +72,9 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
-        categories : book.volumeInfo.categories,
-        price : book.saleInfo.retailPrice.amount
+        price : book.saleInfo.retailPrice.amount,
+        link: book.volumeInfo.infoLink
+
       }));
 
       setSearchedBooks(bookData);
@@ -164,6 +165,7 @@ const SearchBooks = () => {
           {searchedBooks.map((book) => {
             return (
               <Card className="sm" style={{ maxWidth: '18rem' , margin : 10}} key={book.bookId}>
+                <Card.Link to={book.link}>
                 {book.image ? (
                   <Card.Img  style={{ maxWidth: '90%' }} 
                     src={book.image}
@@ -171,6 +173,7 @@ const SearchBooks = () => {
                     variant="top"
                   />
                 ) : null}
+                </Card.Link>
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
