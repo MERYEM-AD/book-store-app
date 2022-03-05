@@ -175,7 +175,7 @@ const SearchBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
                   <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price}</p>
-
+    
 <div className="mb-2" style={{ display: 'flex' ,flexDirection: 'column'}}>
     <Button variant="info"  onClick={handleShow} style={{margin :5}}> 
       About 
@@ -218,7 +218,7 @@ const SearchBooks = () => {
 
                   {Auth.loggedIn() && (
 
-<Link
+<Link  target="_blank"
         variant="warning" style={{margin :5 , backgroundColor: 'orange',padding: 8 ,borderRadius:4,color:'white',textDecoration:'unset'}}
                 // reviwId = bookid
                 to={`/Review/:ReviewId`}
