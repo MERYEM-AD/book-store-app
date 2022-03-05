@@ -187,7 +187,7 @@ const SearchBooks = () => {
           {searchedBooks.map((book) => {
             return (
               <Card className="sm" style={{ maxWidth: '18rem' , margin : 10}} key={book.bookId}>
-                <Card.Link to={book.link}>
+                <Card.Link href={book.link}>
                 {book.image ? (
                   <Card.Img  style={{ maxWidth: '90%' }} 
                     src={book.image}
