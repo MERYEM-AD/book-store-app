@@ -24,8 +24,18 @@ const SearchBooks = () => {
 
   const [show, setShow] = useState(false);
 
+
+  const [currentBook,setCurrentBook] =useState({})
+
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = (book) => {
+  
+    setCurrentBook(book);
+
+    setShow(true);
+
+
+  }
 
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -43,9 +53,6 @@ const SearchBooks = () => {
     return () => saveBookIds(savedBookIds);
   });
 
-  useEffect(() => {
-
-  });
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -160,7 +167,22 @@ const SearchBooks = () => {
         <Row className="justify-content-center">
   
 
-    
+            
+{/* Modal */}
+<Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{currentBook.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{currentBook.description}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          
+{/* end Modal */}
     
           {searchedBooks.map((book) => {
             return (
@@ -180,32 +202,10 @@ const SearchBooks = () => {
                   <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price}</p>
     
 <div className="mb-2" style={{ display: 'flex' ,flexDirection: 'column'}}>
-    <Button variant="info"  onClick={handleShow} style={{margin :5}}> 
+    <Button variant="info"  onClick={()=>handleShow(book)} style={{margin :5}}> 
       About 
-    </Button>{' '}
- 
-
-
-        
-{/* Modal */}
-          <Modal show={show} onHide={handleClose}>
-            <Modal.Header closeButton>
-              <Modal.Title>{book.title}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>{book.description}</Modal.Body>
-            <Modal.Footer>
-              <Button variant="secondary" onClick={handleClose}>
-                Close
-              </Button>
-            </Modal.Footer>
-          </Modal>
-
-          
-{/* end Modal */}
-        
-        
-                  
-                   { Auth.loggedIn() && (
+    </Button>{' '}                  
+                   { Auth.loggedIn() &&(
                     <Button variant="success" style={{margin :5}}
                       disabled={savedBookIds?.some(
                         (savedId) => savedId === book.bookId
