@@ -24,6 +24,7 @@ type User {
     quantity: Int
     image: String
     title: String!
+    link: String
   }
 
 
@@ -46,6 +47,7 @@ type Cart {
     image: String
     link: String
     title: String!
+    price: Float
   }
 
 
