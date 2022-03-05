@@ -1,25 +1,25 @@
-import React from 'react';
+import React from "react";
 import {
   Jumbotron,
   Container,
   CardColumns,
   Card,
   Button,
-} from 'react-bootstrap';
+} from "react-bootstrap";
 
-import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ME } from '../utils/queries';
-import { REMOVE_BOOK } from '../utils/mutations';
-import { removeBookId } from '../utils/localStorage';
+import { useQuery, useMutation } from "@apollo/client";
+import { QUERY_ME } from "../utils/queries";
+import { REMOVE_BOOK } from "../utils/mutations";
+import { removeBookId } from "../utils/localStorage";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 const SavedBooks = () => {
   const { loading, data } = useQuery(QUERY_ME);
- 
+
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
 
-  const userData = data?.me || {};
+  // const userData = data?.me || {};
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
@@ -31,7 +31,6 @@ const SavedBooks = () => {
     }
 
     try {
-      
       const { data } = await removeBook({
         variables: { bookId },
       });
@@ -43,27 +42,29 @@ const SavedBooks = () => {
     }
   };
 
-  if (loading) {
-    return <h2>LOADING...</h2>;
-  }
+  // if (loading) {
+  //   return <h2>LOADING...</h2>;
+  // }
 
-  return (
+  return loading ? (
+    <h2>LOADING...</h2>
+  ) : (
     <>
-      <div fluid className="text-light bg-dark">
+      <div fluid="true" className="text-light bg-dark">
         <Container>
-          <h1>Viewing {userData.username}'s books!</h1>
+          <h1>Viewing {data.me.username}'s books!</h1>
         </Container>
       </div>
       <Container>
         <h2>
-          {userData.savedBooks?.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? 'book' : 'books'
+          {data.me.cart?.length
+            ? `Viewing ${data.me.cart.length} saved ${
+                data.me.cart.length === 1 ? "book" : "books"
               }:`
-            : 'You have no saved books!'}
+            : "You have no saved books!"}
         </h2>
         <div>
-          {userData.savedBooks?.map((book) => {
+          {data.me.cart?.map((book) => {
             return (
               <Card key={book.bookId} border="dark">
                 {book.image ? (
