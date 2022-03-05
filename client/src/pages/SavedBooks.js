@@ -49,11 +49,11 @@ const SavedBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+      <div fluid className="text-light bg-dark">
         <Container>
           <h1>Viewing {userData.username}'s books!</h1>
         </Container>
-      </Jumbotron>
+      </div>
       <Container>
         <h2>
           {userData.savedBooks?.length
@@ -62,7 +62,7 @@ const SavedBooks = () => {
               }:`
             : 'You have no saved books!'}
         </h2>
-        <CardColumns>
+        <div>
           {userData.savedBooks?.map((book) => {
             return (
               <Card key={book.bookId} border="dark">
@@ -87,7 +87,7 @@ const SavedBooks = () => {
               </Card>
             );
           })}
-        </CardColumns>
+        </div>
       </Container>
     </>
   );

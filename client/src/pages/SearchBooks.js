@@ -5,18 +5,28 @@ import {
   Form,
   Button,
   Card,
-  Row
+  Row,
+  Modal
 } from 'react-bootstrap';
 
 import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-
 import Auth from '../utils/auth';
-import Slider from '../components/Slider';
 
 const SearchBooks = () => {
+
+  /*
+  Modal
+  */
+
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // create state for holding our search field data
@@ -31,6 +41,10 @@ const SearchBooks = () => {
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
+  });
+
+  useEffect(() => {
+
   });
 
   // create method to search for books and set state on form submit
@@ -59,7 +73,7 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
         categories : book.volumeInfo.categories,
-        price : book.saleInfo.retailPrice.amount,
+        price : book.saleInfo.retailPrice.amount
       }));
 
       setSearchedBooks(bookData);
@@ -93,42 +107,54 @@ const SearchBooks = () => {
       console.error(err);
     }
   };
+
+
+
   return (
     <>
-  <Form className="d-flex"  onSubmit={handleFormSubmit}>
-        <Container>
-          <Row>
-          
+<Container style={{backgroundColor:'white'}}>
+  <Row>
+    <Col xs={6} md={4} style={{marginTop:40}}>
+      <Row>
+    <Form  onSubmit={handleFormSubmit}>
             <Form.Group style ={{alignItems:'center'}}>
-              <Col xs={12} md={8}>
+              <Col>
                 <Form.Control
                   name="searchInput"
                   value={searchInput}
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a book"
+                  placeholder="Search for a book ..."
                 />
               </Col>
-              <Col xs={12} md={4}>
+              <Col className ="d-grid gap-2" style={{marginTop:20}}>
                 <Button type="submit" variant="success">
                   Search
                 </Button>
               </Col>
             </Form.Group>
-
-          </Row>
-        </Container>
         </Form>
-  
-  <Slider />
+        </Row>
 
-      <Container>
-        <h2>
+        <Row style={{ marginTop :15}}>
+
+<Form.Select aria-label="Default select example">
+  <option>Sort By :</option>
+  <option value="1">One</option>
+  <option value="2">Two</option>
+  <option value="3">Three</option>
+</Form.Select>
+        </Row>
+    </Col>
+
+
+    <Col xs={12} md={8} style = {{color :'chocolate' , textAlign :'center'}}>
+    <h3>
           {searchedBooks.length
-            ? `Viewing ${searchedBooks.length} results:`
-            : 'No searched book done yet'}
-        </h2>
+            ? `${searchedBooks.length} Results:`
+            : 'No Result '}
+        </h3>
 
         <Row className="justify-content-center">
   
@@ -137,9 +163,9 @@ const SearchBooks = () => {
     
           {searchedBooks.map((book) => {
             return (
-              <Card style={{ maxWidth: '22rem' }} key={book.bookId} border="dark">
+              <Card className="sm" style={{ maxWidth: '18rem' , margin : 10}} key={book.bookId}>
                 {book.image ? (
-                  <Card.Img
+                  <Card.Img  style={{ maxWidth: '90%' }} 
                     src={book.image}
                     alt={`The cover for ${book.title}`}
                     variant="top"
@@ -148,36 +174,74 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <p className="small">Price: {book.price}</p>
-                  <Card.Text>{book.description}</Card.Text>
-                  { Auth.loggedIn() && (
-                    <Button
+                  <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price}</p>
+
+<div className="mb-2" style={{ display: 'flex' ,flexDirection: 'column'}}>
+    <Button variant="info"  onClick={handleShow} style={{margin :5}}> 
+      About 
+    </Button>{' '}
+ 
+
+
+        
+{/* Modal */}
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{book.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>{book.description}</Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={handleClose}>
+                Close
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+          
+{/* end Modal */}
+        
+        
+                  
+                   { Auth.loggedIn() && (
+                    <Button variant="success" style={{margin :5}}
                       disabled={savedBookIds?.some(
                         (savedId) => savedId === book.bookId
                       )}
-                      className="btn-block btn-info"
+            
                       onClick={() => handleSaveBook(book.bookId)}
                     >
                       {savedBookIds?.some((savedId) => savedId === book.bookId)
-                        ? 'Book Already Saved!'
-                        : 'Save This Book!'}
+                        ? `Book's been Added`
+                        : 'Add'}
                     </Button>
-                  )}
+                  )}{''}
+
+                  {Auth.loggedIn() && (
 
 <Link
-                className="btn btn-block btn-squared btn-light text-dark"
+        variant="warning" style={{margin :5 , backgroundColor: 'orange',padding: 8 ,borderRadius:4,color:'white',textDecoration:'unset'}}
                 // reviwId = bookid
                 to={`/Review/:ReviewId`}
           
               >
-              See Review
-              </Link>
+               Add Review
+</Link>
+
+                  )}
+
+
+</div>
+
+
                 </Card.Body>
               </Card>
             );
           })}
-          </Row>
-      </Container>
+           </Row>
+    </Col>
+  </Row>
+</Container>
+      
     </>
   );
 };

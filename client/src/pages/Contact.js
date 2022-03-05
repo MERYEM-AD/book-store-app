@@ -1,57 +1,61 @@
 import React from 'react';
-import {Card} from 'react-bootstrap'
+import {Card, Container,CardGroup ,Row} from 'react-bootstrap'
 
  function Contact () {
         return (
-            <div>
-       <Card>
+            <Container>
 
-<Card.Header style ={{fontSize:20 ,color :'orange'}}>Team</Card.Header>
-<Card.Body>
-  <Card.Title>Nick Duval</Card.Title>
-  <Card.Text>
- Role in the Project
-  </Card.Text>
+              <Row className='team'>
 
-  <Card.Link href="#">Github</Card.Link>
-  <Card.Link href="#">Linkedin</Card.Link>
-  <Card.Link href="#">Mail</Card.Link>
+                <p style={{color :'#61361c'}}>Thanks to you for using our website, If you have any concerns or questions feel free to contact us.</p>
 
-</Card.Body>
+<CardGroup>
+  <Card>
+    <Card.Body>
+      <Card.Title>Nick Duval</Card.Title>
+      <Card.Text>
+<p>Worked on :</p>
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+      <Card.Link href='https://github.com/npduval' target="_blank">Github</Card.Link>
+      <Card.Link href='https://github.com/npduval' target="_blank">Linkedin</Card.Link>
+      <Card.Link href='https://github.com/npduval' target="_blank">Mail</Card.Link>
+    </Card.Footer>
+  </Card>
 
+  <Card>
+    <Card.Body>
+      <Card.Title>Hunter Zandri</Card.Title>
+      <Card.Text>
+<p>Worked on :</p>
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+      <Card.Link href='https://github.com/Hunter-Zandri' target="_blank">Github</Card.Link>
+      <Card.Link href='https://github.com/npduval' target="_blank">Linkedin</Card.Link>
+      <Card.Link href='https://github.com/npduval' target="_blank">Mail</Card.Link>
+    </Card.Footer>
+  </Card>
 
+   <Card>
+    <Card.Body>
+      <Card.Title>Meryem Adiri</Card.Title>
+      <Card.Text>
+<p>Worked on :</p>
+      </Card.Text>
+    </Card.Body>
+    <Card.Footer>
+      <Card.Link href='https://github.com/MERYEM-AD' target="_blank">Github</Card.Link>
+      <Card.Link href='https://github.com/npduval' target="_blank">Linkedin</Card.Link>
+      <Card.Link href='https://github.com/npduval' target="_blank">Mail</Card.Link>
+    </Card.Footer>
+  </Card>
+</CardGroup>
 
-<Card.Body>
-  <Card.Title>Hunter Zandri</Card.Title>
-  <Card.Text>
-  Role in the Project
-  </Card.Text>
-
-  <Card.Link href="#">Github</Card.Link>
-  <Card.Link href="#">Linkedin</Card.Link>
-  <Card.Link href="#">Mail</Card.Link>
-
-</Card.Body>
-
-
-
-<Card.Body>
-  <Card.Title>Meryem ADIRI</Card.Title>
-  <Card.Text>
-  Role in the Project
-  </Card.Text>
-
-  <Card.Link href="#">Github</Card.Link>
-  <Card.Link href="#">Linkedin</Card.Link>
-  <Card.Link href="#">Mail</Card.Link>
-
-</Card.Body>
-
-</Card>
-
-
-
-            </div>
+            
+</Row>
+            </Container>
         )
 
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBooks from './SearchBooks';
 import {Container} from 'react-bootstrap';
+import Slider from '../components/Slider';
 
 function Home () {
 
@@ -8,11 +9,14 @@ function Home () {
           
   
   <Container>
+          <Slider />
+          <main>
       <SearchBooks />
     
 
-
+      </main>
  
+
 
 
 
