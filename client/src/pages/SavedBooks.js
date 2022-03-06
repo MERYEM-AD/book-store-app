@@ -66,18 +66,18 @@ const SavedBooks = () => {
         <div>
           {data.me.cart?.map((book) => {
             return (
-              <Card key={book.bookId} border="dark">
+              <Card className="sm" style={{ maxWidth: '25rem' , margin : 10}} key={book.bookId} border="dark">
                 {book.image ? (
-                  <Card.Img
+                  <Card.Img style={{ maxWidth: '90%' }} 
                     src={book.image}
                     alt={`The cover for ${book.title}`}
                     variant="top"
                   />
                 ) : null}
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
+                  <Card.Title>Title: {book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
+                  <Card.Text>Price: {book.price}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteBook(book.bookId)}

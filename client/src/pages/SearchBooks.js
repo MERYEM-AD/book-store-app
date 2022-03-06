@@ -161,7 +161,7 @@ const SearchBooks = () => {
     <h3>
           {searchedBooks.length
             ? `${searchedBooks.length} Results:`
-            : 'No Result '}
+            : 'Start by searching for a book! '}
         </h3>
 
         <Row className="justify-content-center">
