@@ -27,6 +27,12 @@ const bookSchema = new Schema({
   },
   price : {
     type: Number
+  },
+  review : {
+    type: String
+  },
+  rating : {
+    type: Number
   }
 });
 
