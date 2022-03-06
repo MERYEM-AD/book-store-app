@@ -80,7 +80,9 @@ const SearchBooks = () => {
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || '',
         price : book.saleInfo.retailPrice.amount,
-        link: book.volumeInfo.infoLink
+        review: book.volumeInfo.infoLink,
+        link: book.volumeInfo.previewLink,
+        rating: book.volumeInfo.averageRating || 0
 
       }));
 
@@ -133,7 +135,7 @@ const SearchBooks = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a book ..."
+                  placeholder="Search"
                 />
               </Col>
               <Col className ="d-grid gap-2" style={{marginTop:20}}>
@@ -145,7 +147,7 @@ const SearchBooks = () => {
         </Form>
         </Row>
 
-        <Row style={{ marginTop :15}}>
+        {/* <Row style={{ marginTop :15}}>
 
 <Form.Select aria-label="Default select example">
   <option>Sort By :</option>
@@ -153,7 +155,7 @@ const SearchBooks = () => {
   <option value="2">Two</option>
   <option value="3">Three</option>
 </Form.Select>
-        </Row>
+        </Row> */}
     </Col>
 
 
@@ -187,7 +189,7 @@ const SearchBooks = () => {
           {searchedBooks.map((book) => {
             return (
               <Card className="sm" style={{ maxWidth: '18rem' , margin : 10}} key={book.bookId}>
-                <Card.Link href={book.link}>
+                <Card.Link target="_blank" href={book.link}>
                 {book.image ? (
                   <Card.Img  style={{ maxWidth: '90%' }} 
                     src={book.image}
@@ -199,11 +201,12 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>{book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
+                  <p className="small" style={{color: 'black',fontWeight: 'bold',fontStyle: 'normal'}}>Review Stars: {book.rating}</p>
                   <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price}</p>
     
 <div className="mb-2" style={{ display: 'flex' ,flexDirection: 'column'}}>
     <Button variant="info"  onClick={()=>handleShow(book)} style={{margin :5}}> 
-      About 
+      Description
     </Button>{' '}                  
                    { Auth.loggedIn() &&(
                     <Button variant="success" style={{margin :5}}
@@ -215,20 +218,19 @@ const SearchBooks = () => {
                     >
                       {savedBookIds?.some((savedId) => savedId === book.bookId)
                         ? `Book's been Added`
-                        : 'Add'}
+                        : 'Add to cart'}
                     </Button>
                   )}{''}
 
                   {Auth.loggedIn() && (
 
-<Link  target="_blank"
+<Card.Link  target="_blank"
         variant="warning" style={{margin :5 , backgroundColor: 'orange',padding: 8 ,borderRadius:4,color:'white',textDecoration:'unset'}}
                 // reviwId = bookid
-                to={`/Review/:ReviewId`}
-          
+                href={book.review}
               >
                Add Review
-</Link>
+</Card.Link>
 
                   )}
 

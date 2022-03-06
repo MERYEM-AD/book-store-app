@@ -28,14 +28,14 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-             <Nav.Link as={Link} to='/reviews'>
+             {/* <Nav.Link as={Link} to='/reviews'>
                  My Reviews
-              </Nav.Link>
+              </Nav.Link> */}
 
                   <Nav.Link as={Link} to='/cart'>
                     Cart
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}><b style={{color:'chocolate'}}>Hi ,{Auth.getUsername ()} </b>/Logout</Nav.Link>
+                  <Nav.Link onClick={Auth.logout}><b style={{color:'chocolate'}}>Welcome {Auth.getUsername ()} </b>/Logout</Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>

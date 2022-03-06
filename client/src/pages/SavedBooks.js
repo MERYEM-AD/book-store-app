@@ -82,13 +82,14 @@ const SavedBooks = () => {
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteBook(book.bookId)}
                   >
-                    Delete this Book!
+                    Remove from cart
                   </Button>
                 </Card.Body>
               </Card>
             );
           })}
         </div>
+        <button className="btn-primary btn-lg">Checkout</button>
       </Container>
     </>
   );

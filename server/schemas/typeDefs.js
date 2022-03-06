@@ -25,6 +25,8 @@ type User {
     image: String
     title: String!
     link: String
+    review: String
+    rating: Int
   }
 
 
@@ -48,6 +50,8 @@ type Cart {
     link: String
     title: String!
     price: Float
+    review: String
+    rating: Int
   }
 
 
