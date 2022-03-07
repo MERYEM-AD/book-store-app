@@ -119,8 +119,8 @@ const SignupForm = () => {
             Password is required!
           </Form.Control.Feedback>
         </Form.Group>
-        <Button
-          disabled={
+        <Button className='modalButt'
+           disabled={
             !(
               userFormData.username &&
               userFormData.email &&

@@ -4,6 +4,8 @@ import { Navbar, Nav, Container, Modal, Tab } from 'react-bootstrap';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import Auth from '../utils/auth';
+import { BiBookBookmark } from "react-icons/bi";
+import { HiOutlineLogout } from "react-icons/hi";
 const AppNavbar = () => {
   // set modal display state
   const [showModal, setShowModal] = useState(false);
@@ -13,11 +15,11 @@ const AppNavbar = () => {
       <Navbar  expand='lg' className='navbar'>
         <Container fluid className='Header-Container'>
           <Navbar.Brand  className='logo' as={Link} to='/'>
-            BookStore
+          <BiBookBookmark />  BookStore
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' style={{ justifyContent :'end' }}>
-            <Nav className='ml-auto'>
+            <Nav className='ml-auto' style={{ alignItems:'flex-start' }}>
         
               <Nav.Link as={Link} to='/'>
                 Home
@@ -28,14 +30,10 @@ const AppNavbar = () => {
               {/* if user is logged in show saved books and logout */}
               {Auth.loggedIn() ? (
                 <>
-             {/* <Nav.Link as={Link} to='/reviews'>
-                 My Reviews
-              </Nav.Link> */}
-
                   <Nav.Link as={Link} to='/cart'>
                     Cart
                   </Nav.Link>
-                  <Nav.Link onClick={Auth.logout}><b style={{color:'chocolate'}}>Welcome {Auth.getUsername ()} </b>/Logout</Nav.Link>
+                  <Nav.Link onClick={Auth.logout}><b style={{color:'chocolate'}}>Welcome {Auth.getUsername ()} </b>/ <HiOutlineLogout style={{fontSize :35}} /></Nav.Link>
                 </>
               ) : (
                 <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>

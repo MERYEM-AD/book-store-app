@@ -1,10 +1,9 @@
 import React from "react";
 import {
-  Jumbotron,
   Container,
-  CardColumns,
   Card,
   Button,
+  Row,
 } from "react-bootstrap";
 
 import { useQuery, useMutation } from "@apollo/client";
@@ -42,28 +41,19 @@ const SavedBooks = () => {
     }
   };
 
-  // if (loading) {
-  //   return <h2>LOADING...</h2>;
-  // }
-
   return loading ? (
     <h2>LOADING...</h2>
   ) : (
     <>
-      <div fluid="true" className="text-light bg-dark">
-        <Container>
-          <h1>Viewing {data.me.username}'s books!</h1>
-        </Container>
-      </div>
       <Container>
-        <h2>
+      <h2 style = {{color :'chocolate' , textAlign :'center'}}>
           {data.me.cart?.length
             ? `Viewing ${data.me.cart.length} saved ${
                 data.me.cart.length === 1 ? "book" : "books"
               }:`
             : "You have no saved books!"}
         </h2>
-        <div>
+        <Row>
           {data.me.cart?.map((book) => {
             return (
               <Card className="sm" style={{ maxWidth: '25rem' , margin : 10}} key={book.bookId} border="dark">
@@ -77,7 +67,7 @@ const SavedBooks = () => {
                 <Card.Body>
                   <Card.Title>Title: {book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <Card.Text>Price: {book.price}</Card.Text>
+                  <Card.Text>Price: {book.price === 0?` ${book.price} $ (free)`: `${book.price} $`}</Card.Text>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteBook(book.bookId)}
@@ -88,7 +78,7 @@ const SavedBooks = () => {
               </Card>
             );
           })}
-        </div>
+        </Row>
         <button className="btn-primary btn-lg">Checkout</button>
       </Container>
     </>
