@@ -215,7 +215,7 @@ const SearchBooks = () => {
                 <Card.Body>
                   <Card.Title>Title : {book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <p className="small" style={{color: 'red',fontWeight: 'bold',fontStyle: 'normal'}}>Review Stars: {book.rating}</p>
+                  <p className="small" style={{color: 'red',fontWeight: 'bold',fontStyle: 'normal'}}>Review Stars: {book.rating === 0?`(No ratings yet)`: `${book.rating}`} </p>
                   <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price === 0?` ${book.price} $ (free)`: `${book.price} $`} </p>
     
 <div className="mb-2" style={{ display: 'flex' ,flexDirection: 'column'}}>
