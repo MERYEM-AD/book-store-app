@@ -4,11 +4,7 @@ body {
   background-image: url("https://thumbs.dreamstime.com/b/grungy-book-background-7862122.jpg");
   background-position: center;
   background-size: cover;
-  /* height: 30vh; */
   background-attachment: fixed; 
-       /*Turn this section to flexbox */
-
-
 }
 
 h1,
@@ -42,14 +38,14 @@ background-color: white;
   background-color: #61361c;
 }
 .navbar-light .navbar-brand {
+
   color: #61361c;
-  font-size: 29px;
+  font-size: 34px;
+  font-family: 'BioRhyme', serif;
   background-color: #CECD94;
   border-radius: 0px 30px 30px 0px;
   padding: 19px;
   margin-left: -10px;
-  padding-left: 38px;
-  font-weight: bolder;
 }
 .navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover{
   color: #61361c;
@@ -58,6 +54,7 @@ background-color: white;
 
   color: white;
   font-size: 20px;
+  font-family: 'Inknut Antiqua', serif;
 }
 
 .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
@@ -129,7 +126,8 @@ background-color: white;
 }
 .card-title{
   color: #61361c;
-  font-size: 14px;
+  font-size: 16px;
+  text-decoration: underline;
 }
 
 /* Team */

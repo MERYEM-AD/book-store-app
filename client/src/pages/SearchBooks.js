@@ -9,11 +9,12 @@ import {
   Modal
 } from 'react-bootstrap';
 
-import { Link } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import Auth from '../utils/auth';
+import Sort from '../components/Sort';
+import {AiOutlineSearch} from 'react-icons/ai'
 
 const SearchBooks = () => {
 
@@ -21,21 +22,17 @@ const SearchBooks = () => {
   Modal
   */
 
-
   const [show, setShow] = useState(false);
-
-
   const [currentBook,setCurrentBook] =useState({})
-
   const handleClose = () => setShow(false);
   const handleShow = (book) => {
-  
     setCurrentBook(book);
-
     setShow(true);
-
-
   }
+
+  // Sort state
+  
+  const [sortBooks,setSortBooks]=useState('');
 
   // create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
@@ -82,7 +79,9 @@ const SearchBooks = () => {
         price : book.saleInfo.retailPrice.amount,
         review: book.volumeInfo.infoLink,
         link: book.volumeInfo.previewLink,
-        rating: book.volumeInfo.averageRating || 0
+        rating: book.volumeInfo.averageRating || 0,
+   
+
 
       }));
 
@@ -111,14 +110,35 @@ const SearchBooks = () => {
       const { data } = await saveBook({
         variables: { bookData: { ...bookToSave } },
       });
-      console.log(savedBookIds);
+      // console.log(savedBookIds);
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
   };
 
+  // Sort Books by Price and Published Date
 
+  const handleSort = async(e)=>{
+    setSortBooks(e.target.value)
+   setSearchedBooks(sortedBooks)
+  }
+
+
+  const sortedBooks =  searchedBooks.sort((a,b)=>{
+    if (sortBooks === 'toLow'){
+    
+      return parseInt(b.price) - parseInt(a.price)
+    }
+    else if(sortBooks === 'toHeight'){
+    
+      return parseInt(a.price)- parseInt(b.price)
+    }
+    else{
+
+      return;
+    }
+      })
 
   return (
     <>
@@ -140,22 +160,16 @@ const SearchBooks = () => {
               </Col>
               <Col className ="d-grid gap-2" style={{marginTop:20}}>
                 <Button type="submit" variant="success">
-                  Search
+                <AiOutlineSearch  style={{fontSize :25}}/>
                 </Button>
               </Col>
             </Form.Group>
         </Form>
         </Row>
 
-        {/* <Row style={{ marginTop :15}}>
+{/* Render Sort component */}
+<Sort handleSort ={handleSort}/>
 
-<Form.Select aria-label="Default select example">
-  <option>Sort By :</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</Form.Select>
-        </Row> */}
     </Col>
 
 
@@ -199,10 +213,10 @@ const SearchBooks = () => {
                 ) : null}
                 </Card.Link>
                 <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
+                  <Card.Title>Title : {book.title}</Card.Title>
                   <p className="small">Authors: {book.authors}</p>
-                  <p className="small" style={{color: 'black',fontWeight: 'bold',fontStyle: 'normal'}}>Review Stars: {book.rating}</p>
-                  <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price}</p>
+                  <p className="small" style={{color: 'red',fontWeight: 'bold',fontStyle: 'normal'}}>Review Stars: {book.rating}</p>
+                  <p className="small" style={{color: 'green',fontWeight: 'bold',fontStyle: 'normal'}}>Price: {book.price === 0?` ${book.price} $ (free)`: `${book.price} $`} </p>
     
 <div className="mb-2" style={{ display: 'flex' ,flexDirection: 'column'}}>
     <Button variant="info"  onClick={()=>handleShow(book)} style={{margin :5}}> 
@@ -226,7 +240,6 @@ const SearchBooks = () => {
 
 <Card.Link  target="_blank"
         variant="warning" style={{margin :5 , backgroundColor: 'orange',padding: 8 ,borderRadius:4,color:'white',textDecoration:'unset'}}
-                // reviwId = bookid
                 href={book.review}
               >
                Add Review
