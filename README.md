@@ -1,5 +1,4 @@
 # book-store-app
-# book-store-app
 ![License: ISC](https://img.shields.io/badge/license-ISC-green)
   ## Description:
 A state-of-the-art online Book Store that allows registered users to search, sort by price, review, and add a favorite book from an extensive list of best sellers to The cart.
@@ -29,12 +28,13 @@ As an avid reader, I would like to browse popular books based on my reading pref
 The User needs to clone first the repo then install dependencies and runing the following command :
 
  ``` 
-npm run build
- ```
-
- ``` 
 npm run develop
  ```
+
+  Now You can interact  with the Application (Client) at :http://localhost:3000/ 
+  And with the (Server) GraphQL playground  at: http://localhost:3001/graphql
+
+
   ## License
   This Project is licensed under **ISC** license.
   
@@ -62,9 +62,9 @@ Add books to the Cart :
   
 * Email : adiri.meryem.mw@gmail.com  ||   [Meryem's Github Account](https://github.com/MERYEM-AD).
 
-* Email : Zandrihunter@gmail.com ||  [Hunter's Account](https://github.com/Hunter-Zandri).
+* Email : Zandrihunter@gmail.com ||  [Hunter's Github Account](https://github.com/Hunter-Zandri).
 
-* Email : Nicholspduval74@gmail.com ||  [Nichols's Account](https://github.com/npduval).
+* Email : Nicholspduval74@gmail.com ||  [Nichols's Github Account](https://github.com/npduval).
 
 
   ## Copyright
