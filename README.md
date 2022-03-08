@@ -30,6 +30,11 @@ The User needs to clone first the repo then install dependencies and runing the 
  ``` 
 npm run develop
  ```
+
+  Now You can interact  with the Application (Client) at :http://localhost:3000/ 
+  And with the (Server) GraphQL playground  at: http://localhost:3001/graphql
+
+
   ## License
   This Project is licensed under **ISC** license.
   
