@@ -1,5 +1,4 @@
 # book-store-app
-# book-store-app
 ![License: ISC](https://img.shields.io/badge/license-ISC-green)
   ## Description:
 A state-of-the-art online Book Store that allows registered users to search, sort by price, review, and add a favorite book from an extensive list of best sellers to The cart.
